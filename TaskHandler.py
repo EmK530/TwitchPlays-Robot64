@@ -181,7 +181,7 @@ def addTask(taskId, duration, user):
       except Exception:
          duration = defaultTaskLength[taskId]
    if duration!=None and math.isnan(duration):
-      duration = taskLengthLimit[taskId]
+      duration = defaultTaskLength[taskId]
    if duration!=None and duration > taskLengthLimit[taskId]:
       duration = taskLengthLimit[taskId]
       print(duration)
