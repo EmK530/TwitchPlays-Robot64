@@ -12,6 +12,8 @@ from threading import Thread
 from Render import messages,launched
 from TaskHandler import tasks,addTask
 
+CommandsURL="https://blog.emk530.net/tpr64"
+
 success=False
 nonce = ""
 running=[False]
@@ -19,8 +21,8 @@ old=print
 def print(string):
    old("[TwitchSocket] "+str(string))
 
-#channel = input("[1/3] Input name of account to track: ")
-channel = "EmK530"
+channel = input("[1/3] Input name of account to track: ")
+#channel = "EmK530"
 start = time.time()
 firstrun = True
 file=open("auth.txt","r")
@@ -62,7 +64,7 @@ def handle_message(ws, msg, name):
       if com=="uptime":
          send_message(ws, "I have been online for "+str(datetime.timedelta(seconds=math.floor(time.time()-start))))
       elif com=="help":
-         send_message(ws, "Commands can be found at: https://blog.emk530.net/tpr64")
+         send_message(ws, "Commands can be found at: "+CommandsURL)
       elif com in comms:
          idx=comms.index(com)
          if com in instComms:
