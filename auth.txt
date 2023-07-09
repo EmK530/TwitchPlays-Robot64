@@ -1,0 +1,9 @@
+CAP REQ :twitch.tv/tags twitch.tv/commands
+PASS oauth:------------------------------
+NICK namehere
+USER namehere 8 * :namehere
+
+The script reads the first four lines from this file and uses it for authentication.
+The oauth code and NICK/USER lines can be found by analyzing the Twitch websocket connection with your browser.
+Make sure not to log out of the account after retrieving the oauth code or it will change.
+My tip is to use incognito then close the tab when finished.
