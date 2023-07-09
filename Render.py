@@ -16,6 +16,7 @@ def main():
    from os import system
    import math
    import time
+   from screeninfo import get_monitors
    from TwitchSocket import running
    from TaskHandler import TaskStep,tasks,taskCancels,KillTasks
    os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -25,10 +26,15 @@ def main():
    except ImportError:
       os.system('pip install pygame')
       import pygame
+   mon = None
+   for m in get_monitors():
+      if m.is_primary:
+         mon = m
+         break
    launched[0]=True
    #ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-   resX=1920/div
-   resY=1080/div
+   resX=mon.width/div
+   resY=mon.height/div
    pygame.font.init()
    font = pygame.font.SysFont('bahnschrift', math.floor(resY/36))
    twitch = pygame.image.load("twitch.png")
