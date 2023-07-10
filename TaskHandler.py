@@ -17,7 +17,7 @@ f={
 }
 taskNames=(
    "Jump","Spin Attack","Long Jump","Camera Left","Camera Right",
-   "Dive [E]","Backflip","Move Forward","Move Left","Move Backwards","Move Right",
+   "Dive","Backflip","Move Forward","Move Left","Move Backwards","Move Right",
    "Ground Pound","Camera Up","Camera Down","Stop Moving","Dance","Dab","Double Jump",
    "Backflip Forwards","Crouch","Pause","Follow Camera","Back to Hub","Snapshoot","MAKE Back to Hub"
 )
