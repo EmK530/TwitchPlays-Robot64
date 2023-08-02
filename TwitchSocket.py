@@ -95,7 +95,7 @@ def on_message(ws, message):
       running[0] = True
       nonce = ("%032x" % random.getrandbits(128))
       #ws.send("@client-nonce="+nonce+" PRIVMSG #"+channel+" :"+"Server is now online, hello world!")
-   elif "client-nonce=" in message and message.split("client-nonce=")[1].split(";")[0] != nonce:
+   elif "PRIVMSG" in message and (not "client-nonce=" in message or message.split("client-nonce=")[1].split(";")[0] != nonce):
       msg = message.split("PRIVMSG")[1].split(":")[1].split("\r")[0]
       name = message.split("display-name=")[1].split(";")[0]
       handle_message(ws,msg,name)
