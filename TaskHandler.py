@@ -1,5 +1,6 @@
 import pydirectinput,math
 from Render import messages
+import getpixelcolor
 
 pydirectinput.PAUSE = 0
 
@@ -17,7 +18,7 @@ f={
 }
 taskNames=(
    "Jump","Spin Attack","Long Jump","Camera Left","Camera Right",
-   "Dive","Backflip","Move Forward","Move Left","Move Backwards","Move Right",
+   "Dive [E]","Backflip","Move Forward","Move Left","Move Backwards","Move Right",
    "Ground Pound","Camera Up","Camera Down","Stop Moving","Dance","Dab","Double Jump",
    "Backflip Forwards","Crouch","Pause","Follow Camera","Back to Hub","Snapshoot","MAKE Back to Hub"
 )
@@ -167,10 +168,6 @@ def TaskHandleMulti(li,idx,taskId):
          f[a[1]](a[0])
    pydirectinput.PAUSE = 0
    UIdeb=False
-   if taskNames[taskId]=="Back to Hub":
-      pause=False
-   elif taskNames[taskId]=="MAKE Back to Hub":
-      pause=False
 def addTask(taskId, duration, user):
    global pause,UIdeb
    if not duration:
@@ -181,7 +178,7 @@ def addTask(taskId, duration, user):
       except Exception:
          duration = defaultTaskLength[taskId]
    if duration!=None and math.isnan(duration):
-      duration = defaultTaskLength[taskId]
+      duration = taskLengthLimit[taskId]
    if duration!=None and duration > taskLengthLimit[taskId]:
       duration = taskLengthLimit[taskId]
       print(duration)
@@ -198,14 +195,18 @@ def addTask(taskId, duration, user):
    msg=user+": "+str(taskNames[taskId])
    if duration!=None and duration>0 and taskUnit[taskId]!=None:
       msg=msg+" ("+str(oldDur)+" "+str(taskUnit[taskId])+")"
-   if not UIdeb and ((pause and UITask[taskId]) or (not pause and not UITask[taskId]) or taskNames[taskId]=="Pause"):
+   cond1 = taskNames[taskId]=="MAKE Back to Hub" and getpixelcolor.pixel(1333,15)==(212,242,92)
+   if cond1 or (taskNames[taskId]!="MAKE Back to Hub" and not UIdeb and ((pause and UITask[taskId]) or (not pause and not UITask[taskId]) or taskNames[taskId]=="Pause")):
       messages[0].append([True,msg,(170,255,170)])
       tasks[0].append([taskId,duration,False])
       UIdeb=UIdebL[taskId]
    else:
       messages[0].append([True,msg,(255,170,170)])
-   
+
 def TaskStep(dt):
+   global pause
+   px=getpixelcolor.pixel(1225,168)
+   pause=(px==(166,177,252))
    for i in tasks[0]:
       check=True
       if not i[2]:
