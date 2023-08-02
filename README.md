@@ -4,6 +4,8 @@ TPR64 is a modification of [TwitchOverlay](https://github.com/EmK530/TwitchOverl
 
 ## Dependencies
 
+This is currently hardcoded to function for a 1920x1080 monitor, if your resolution is different some code changes are needed.
+
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the following modules:
 
 ```bash
@@ -11,6 +13,7 @@ pip install pydirectinput
 pip install pygame
 pip install screeninfo
 pip install websocket-client
+pip install getpixelcolor
 ```
 
 ## Contributing
